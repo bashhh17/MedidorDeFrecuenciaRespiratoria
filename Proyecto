@@ -1,2 +1,14 @@
+import tkinter as tk
+from tkinter import font
+import pandas as pd
 
-uwu
+#Diseño de la Ventana principal
+ventana_principal = tk.Tk()
+ventana_principal.geometry('800x600')
+ventana_principal.config(background='#34495E')
+tk.Wm.wm_title(ventana_principal,"Sensor EsRes")
+
+#Labels
+lname=tk.Label(ventana_principal,text='Nombre:', bg='#34495E',fg='black', font='Technic').pack()
+
+ventana_principal.mainloop()
