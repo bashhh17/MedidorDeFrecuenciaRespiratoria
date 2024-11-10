@@ -14,7 +14,7 @@ tk.Wm.wm_title(ventana_principal,"Sensor EsRes")
 def abrir_ventana_usuarios():
     # Crear una ventana secundaria
     ventana_secundaria1 = tk.Toplevel()
-    ventana_secundaria1.title("Ventana secundaria")
+    ventana_secundaria1.title("Usuarios")
     ventana_secundaria1.config(width=400, height=300)
     
     def cursor():
