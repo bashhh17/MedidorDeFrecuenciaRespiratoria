@@ -5,12 +5,12 @@ import os
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
-from PIL import Image, ImageTk, ImageSequence  # Para manejar GIFs animados
+from PIL import Image, ImageTk, ImageSequence  
 import serial
 import csv
 from datetime import datetime
 from tkinter import simpledialog, messagebox
-import threading  # Importar threading
+import threading  
 
 # Configuración del puerto serial
 serial_port = 'COM6'  
@@ -169,6 +169,7 @@ def mostrar_medicion():
     for widget in panel_derecho.winfo_children():
         widget.destroy()
     etiqueta_medicion = tk.Label(panel_derecho, text="MEDICIÓN DE FRECUENCIA RESPIRATORIA", font=("Century Gothic", 19, "bold"), fg="#274C50", bg="#D6EAF8")
+
     etiqueta_medicion.pack(pady=20)
 
     # Botón para iniciar la medición
@@ -237,14 +238,39 @@ boton_iniciar.pack(pady=20)
 panel_izquierdo = tk.Frame(ventana_principal, width=150, bg="#8CC9D2")
 panel_derecho = tk.Frame(ventana_principal, bg="#D6EAF8")
 
+imagen_panel_izquierdo = Image.open("logobreath.png")  
+imagen_panel_izquierdo = imagen_panel_izquierdo.resize((160, 160), Image.Resampling.LANCZOS)
+imagen_panel_izquierdo_tk = ImageTk.PhotoImage(imagen_panel_izquierdo)
+etiqueta_imagen_izquierda = tk.Label(panel_izquierdo, image=imagen_panel_izquierdo_tk, bg="#8CC9D2")
+etiqueta_imagen_izquierda.image = imagen_panel_izquierdo_tk
+etiqueta_imagen_izquierda.place(x=0, y=0)
+etiqueta_imagen_izquierda.pack()
+
+#Imagenes botones usuarios y medición:
+#Usuarios
+file="usuario.png"
+usuario1= Image.open(file)
+usuario1=usuario1.resize((30,30), Image.Resampling.LANCZOS)
+user=ImageTk.PhotoImage(usuario1)
+#Medición
+file2="medicion.png"
+medicion1= Image.open(file2)
+medicion1=medicion1.resize((30,30), Image.Resampling.LANCZOS)
+med=ImageTk.PhotoImage(medicion1)
+#Cerrar
+file3="cerrar.png"
+cerrar= Image.open(file3)
+cerrar=cerrar.resize((30,30), Image.Resampling.LANCZOS)
+close=ImageTk.PhotoImage(cerrar)
+
 # Botones en el panel izquierdo
-boton1 = tk.Button(panel_izquierdo, text="Usuario", command=mostrar_usuario, bd=3, bg="#427c8a", cursor="hand2", fg="#c6d8dc", font=("Arial", 12, "bold"), height=2, padx=10, pady=5, width=15)
+boton1 = tk.Button(panel_izquierdo, text="Usuario", image=user ,compound="left",command=mostrar_usuario, bd=3, bg="#427c8a", cursor="hand2", fg="#c6d8dc", font=("Arial", 12, "bold"), height=35, padx=10, pady=5, width=100)
 boton1.pack(padx=20, pady=20)
 
-boton2 = tk.Button(panel_izquierdo, text="Medición", command=mostrar_medicion, bd=3, bg="#427c8a", cursor="hand2", fg="#c6d8dc", font=("Arial", 12, "bold"), height=2, padx=10, pady=5, width=15)
+boton2 = tk.Button(panel_izquierdo, text="Medición", image=med, compound="left",command=mostrar_medicion, bd=3, bg="#427c8a", cursor="hand2", fg="#c6d8dc", font=("Arial", 12, "bold"), height=35, padx=10, pady=5, width=100)
 boton2.pack(padx=20, pady=20)
 
-boton3 = tk.Button(panel_izquierdo, text="Cerrar", command=ventana_principal.destroy, bd=3, bg="#427c8a", cursor="hand2", fg="#c6d8dc", font=("Arial", 12, "bold"), height=2, padx=10, pady=5, width=15)
+boton3 = tk.Button(panel_izquierdo, text="Cerrar", image=close, compound="left",command=ventana_principal.destroy, bd=3, bg="#427c8a", cursor="hand2", fg="#c6d8dc", font=("Arial", 12, "bold"), height=35, padx=10, pady=5, width=100)
 boton3.pack(padx=20, pady=20)
 
 ventana_principal.mainloop()
